@@ -28,7 +28,7 @@ class FragDevList : ListFragment() {
 
         m_dev_list_adapter = object : ArrayAdapter<BluetoothDevice>(activity!!, 0, m_dev_list) {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-                val dev: BluetoothDevice = m_dev_list.get(position)
+                val dev: BluetoothDevice = m_dev_list[position]
                 var view = convertView
                 if (view == null) {
                     view = activity!!.layoutInflater.inflate(R.layout.frag_dev_list, parent, false)
@@ -38,6 +38,9 @@ class FragDevList : ListFragment() {
                 name.text = dev.name
                 address.text = dev.address
                 return view
+            }
+            override fun getCount(): Int {
+                return m_dev_list.size
             }
         }
     }
@@ -72,7 +75,7 @@ class FragDevList : ListFragment() {
         when (item.itemId) {
             R.id.v_setting -> {
                 val intent: Intent = Intent()
-                intent.setAction(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS)
+                intent.action = android.provider.Settings.ACTION_BLUETOOTH_SETTINGS
                 startActivity(intent)
             }
             else -> {
@@ -86,7 +89,10 @@ class FragDevList : ListFragment() {
     // LIST
     //
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
-        val dev: BluetoothDevice = m_dev_list.get(position - 1)
+        //---- kong ----
+        (activity as ActMain).hide()
+        //----
+        val dev: BluetoothDevice = m_dev_list[position - 1]
         val arg: Bundle = Bundle()
         arg.putString("device", dev.address)
         val f: Fragment = FragGame()

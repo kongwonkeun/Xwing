@@ -104,19 +104,19 @@ class GConfig {
                 .setUsage(AudioAttributes.USAGE_GAME)
                 .build()
             sound_pool = SoundPool.Builder()
-                .setAudioAttributes(attributes)
+                //.setAudioAttributes(attributes)
                 .setMaxStreams(5)
                 .build()
             sound_laser = sound_pool.load(ctx, R.raw.laser, 1)
-            sound_big = sound_pool.load(ctx, R.raw.big_explosion, 1)
-            sound_small = sound_pool.load(ctx, R.raw.small_explosion, 1)
+            sound_big = sound_pool.load(ctx, R.raw.big_explosion, 2)
+            sound_small = sound_pool.load(ctx, R.raw.small_explosion, 3)
         }
 
         fun play_sound(sound: String) {
             when (sound) {
-                "Laser" -> { sound_pool.play(sound_laser, 1f, 1f, 1, 0, 1f) }
-                "Big"   -> { sound_pool.play(sound_big,   1f, 1f, 1, 0, 1f) }
-                "Small" -> { sound_pool.play(sound_small, 1f, 1f, 1, 0, 1f) }
+                "Laser" -> { sound_pool.play(sound_laser, 1f, 1f, 9, 0, 1f) }
+                "Big"   -> { sound_pool.play(sound_big,   1f, 1f, 9, 0, 1f) }
+                "Small" -> { sound_pool.play(sound_small, 1f, 1f, 9, 0, 1f) }
                 else -> {}
             }
         }

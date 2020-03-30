@@ -28,11 +28,13 @@ class ActMain : AppCompatActivity(), FragmentManager.OnBackStackChangedListener 
         }
     }
 
+    /*
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         m_handler.removeCallbacks(m_hide_runnable)
         m_handler.postDelayed(m_hide_runnable, MyConfig.AUTO_HIDE_DELAY_MS.toLong())
     }
+    */
 
     //
     // FRAGMENT MANAGER

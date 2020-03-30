@@ -107,7 +107,8 @@ class GXwing(val scr_w: Int, val scr_h: Int) {
         if (anim_span > anim_delay) {
             anim_span = 0f
             id = 1 - id
-            img = GConfig.xwing_img[id]
+            img = GConfig.xwing_img[0]
+            //img = GConfig.xwing_img[id]
         }
     }
 

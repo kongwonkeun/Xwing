@@ -140,6 +140,7 @@ class FragGame : Fragment(), ServiceConnection, BTCallback {
     var d_last_: Int = 0
     var dir_: Int = 0
     var speed_: Int = 0
+    var delay_: Int = 0
 
     private fun state_machine(b: Int) {
         if (b == 86) {
@@ -189,8 +190,16 @@ class FragGame : Fragment(), ServiceConnection, BTCallback {
             }
         }
         if (s_ == 6) {
+            delay_++
             speed_ = v_
-            GView.xwing.fire_5_()
+            if (delay_%6 == 0) {
+                when { //---- kong ----
+                    speed_ < 100 -> GView.xwing.fire_1_()
+                    speed_ in 100..300 -> GView.xwing.fire_2_()
+                    speed_ in 300..600 -> GView.xwing.fire_3_()
+                    else -> GView.xwing.fire_5_() // larger than 600
+                }
+            }
             //status("speed = $speed_")
             return
         }
@@ -203,7 +212,7 @@ class FragGame : Fragment(), ServiceConnection, BTCallback {
                 } else {
                     dir_ = 0
                 }
-                //GView.xwing.start_move_(dir_)
+                GView.xwing.start_move_(dir_) //---- kong ----
                 //status("dir = $dir_")
                 return
             }
